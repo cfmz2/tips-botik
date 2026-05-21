@@ -14,14 +14,18 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
-# Клавиатура с чаевыми
+# Клавиатура с чаевыми - 2 ряда по 3 и 2 кнопки
 def get_tips_keyboard():
     buttons = [
-        [InlineKeyboardButton(text="⭐ 1 звезда", callback_data="tip_1")],
-        [InlineKeyboardButton(text="⭐⭐ 15 звёзд", callback_data="tip_15")],
-        [InlineKeyboardButton(text="⭐⭐⭐ 25 звёзд", callback_data="tip_25")],
-        [InlineKeyboardButton(text="⭐⭐⭐⭐ 50 звёзд", callback_data="tip_50")],
-        [InlineKeyboardButton(text="⭐⭐⭐⭐⭐ 100 звёзд", callback_data="tip_100")]
+        [
+            InlineKeyboardButton(text="⭐ 1 звезда", callback_data="tip_1"),
+            InlineKeyboardButton(text="⭐⭐ 15 звёзд", callback_data="tip_15"),
+            InlineKeyboardButton(text="⭐⭐⭐ 25 звёзд", callback_data="tip_25")
+        ],
+        [
+            InlineKeyboardButton(text="⭐⭐⭐⭐ 50 звёзд", callback_data="tip_50"),
+            InlineKeyboardButton(text="⭐⭐⭐⭐⭐ 100 звёзд", callback_data="tip_100")
+        ]
     ]
     return InlineKeyboardMarkup(inline_keyboard=buttons)
 
