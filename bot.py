@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.INFO)
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
-# Клавиатура с чаевыми - 2 ряда по 3 и 2 кнопки
+# Клавиатура с чаевыми - 2 ряда
 def get_tips_keyboard():
     buttons = [
         [
@@ -33,13 +33,9 @@ def get_tips_keyboard():
 @dp.message(Command("start"))
 async def start_command(message: types.Message):
     text = (
-        "🎯 **Поддержи проект!**\n\n"
-        "👉 **Поддержи меня звёздами**\n"
-        "👈 **Чаевые за работу!**\n\n"
-        "Выбери сумму:\n"
-        "👇 Нажми на кнопку 👇\n\n"
-        "———————————————\n"
-        "✅ **Хороший гарант:** @wozsk"
+        "Поддержать меня (@wozsk) 👇👇👇\n"
+        "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯\n"
+        "✅ Хороший гарант: @wozsk"
     )
     await message.answer(text, reply_markup=get_tips_keyboard(), parse_mode=ParseMode.MARKDOWN)
 
@@ -50,7 +46,7 @@ async def process_tip(callback: types.CallbackQuery):
     stars = int(amount)
     
     title = f"Чаевые {stars} ⭐"
-    description = "Поддержи меня звёздами!"
+    description = "Поддержать меня (@wozsk)"
     payload = f"tip_{stars}"
     currency = "XTR"
     prices = [{"label": "Чаевые за работу!", "amount": stars}]
@@ -80,10 +76,11 @@ async def pre_checkout_query(pre_checkout_query: types.PreCheckoutQuery):
 async def successful_payment(message: types.Message):
     stars = message.successful_payment.total_amount
     await message.answer(
-        f"✨ Спасибо за чаевые {stars} ⭐!\n"
-        f"Твоя поддержка очень важна 🤝\n\n"
-        f"———————————————\n"
-        f"✅ **Хороший гарант:** @wozsk",
+        f"✨ Спасибо за пожертвования в проект! ✨\n\n"
+        f"Спасибо за чаевые {stars} ⭐!\n\n"
+        f"Поддержать меня (@wozsk) 👇👇👇\n"
+        f"⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯\n"
+        f"✅ Хороший гарант: @wozsk",
         parse_mode=ParseMode.MARKDOWN
     )
 
